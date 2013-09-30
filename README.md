@@ -1,24 +1,26 @@
-zend-server Cookbook
+zendserver Cookbook
 ====================
-TODO: Enter the cookbook description here.
+This cookbook installs and manages Zend Server
 
-e.g.
-This cookbook makes your favorite breakfast sandwhich.
+It allows bootstrapping Zend Server in single server mode or cluster mode.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-e.g.
-#### packages
-- `toaster` - zend-server needs toaster to brown your bagel.
+#### Platforms
+- Debian, Ubuntu
+- RHEL, CentOS, Oracle Linux
+
+#### Cookbooks
+- apt
+- yum
 
 Attributes
 ----------
 TODO: List you cookbook attributes here.
 
 e.g.
-#### zend-server::default
+#### zendserver::default
 <table>
   <tr>
     <th>Key</th>
@@ -27,33 +29,106 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['zend-server']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['zendserver']['version']</tt></td>
+    <td>string</td>
+    <td>Zend Server version to install</td>
+    <td><tt>6.1</tt></td>
   </tr>
+  <tr>
+    <td><tt>['zendserver']['phpversion']</tt></td>
+    <td>string</td>
+    <td>PHP version to install</td>
+    <td><tt>5.4</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['ordernumber']</tt></td>
+    <td>string</td>
+    <td>The order number part of the license information</td>
+    <td><tt>-</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['licensekey']</tt></td>
+    <td>string</td>
+    <td>The license key part of the license information</td>
+    <td><tt>-</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['production']</tt></td>
+    <td>boolean</td>
+    <td>Bootstrap Zend Server in production (true)/development(false) mode (See zend server documentation for more details)</td>
+    <td><tt>TRUE</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['apikeyname']</tt></td>
+    <td>string</td>
+    <td>Name fort the web API key that the installer creates. The api key is required for all management functionality</td>
+    <td><tt>-</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['apikeysecret']</tt></td>
+    <td>string</td>
+    <td>A 64 character key used for signing API requests</td>
+    <td><tt>-</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['adminemail']</tt></td>
+    <td>string</td>
+    <td>An email address for the Zend Server admin</td>
+    <td><tt>-</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['dbhost']</tt></td>
+    <td>string</td>
+    <td>A MySQL database server host address - required for clustering</td>
+    <td><tt>-</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['dbusername']</tt></td>
+    <td>string</td>
+    <td>The MySQL server username, must be able to create a database - required for clustering</td>
+    <td><tt>-</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['dbpassword']</tt></td>
+    <td>string</td>
+    <td>The MySQL server password - required for clustering</td>
+    <td><tt>-</tt></td>
+  </tr>
+
 </table>
 
 Usage
 -----
-#### zend-server::default
-TODO: Write usage instructions for each cookbook.
+#### zendserver:single
+Installs Zend Server, and bootstraps in single server mode
 
-e.g.
-Just include `zend-server` in your node's `run_list`:
+Just include `zendserver` in your node's `run_list`:
 
 ```json
 {
   "name":"my_node",
   "run_list": [
-    "recipe[zend-server]"
+    "recipe[zendserver::single]"
+  ]
+}
+```
+
+#### zendserver:cluster
+Installs Zend Server, and bootstraps in cluster mode
+
+Just include `zendserver` in your node's `run_list`:
+
+```json
+{
+  "name":"my_node",
+  "run_list": [
+    "recipe[zendserver::cluster]"
   ]
 }
 ```
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
 
 e.g.
 1. Fork the repository on Github
@@ -62,7 +137,3 @@ e.g.
 4. Write tests for your change (if applicable)
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
-
-License and Authors
--------------------
-Authors: TODO: List authors
