@@ -1,0 +1,1 @@
+actions :stop, :start, :restart

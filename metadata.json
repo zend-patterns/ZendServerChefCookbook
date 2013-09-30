@@ -1,0 +1,173 @@
+{
+  "providing": {
+  },
+  "platforms": {
+  },
+  "conflicting": {
+  },
+  "long_description": "zend-server Cookbook\n====================\nTODO: Enter the cookbook description here.\n\ne.g.\nThis cookbook makes your favorite breakfast sandwhich.\n\nRequirements\n------------\nTODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.\n\ne.g.\n#### packages\n- `toaster` - zend-server needs toaster to brown your bagel.\n\nAttributes\n----------\nTODO: List you cookbook attributes here.\n\ne.g.\n#### zend-server::default\n<table>\n  <tr>\n    <th>Key</th>\n    <th>Type</th>\n    <th>Description</th>\n    <th>Default</th>\n  </tr>\n  <tr>\n    <td><tt>['zend-server']['bacon']</tt></td>\n    <td>Boolean</td>\n    <td>whether to include bacon</td>\n    <td><tt>true</tt></td>\n  </tr>\n</table>\n\nUsage\n-----\n#### zend-server::default\nTODO: Write usage instructions for each cookbook.\n\ne.g.\nJust include `zend-server` in your node's `run_list`:\n\n```json\n{\n  \"name\":\"my_node\",\n  \"run_list\": [\n    \"recipe[zend-server]\"\n  ]\n}\n```\n\nContributing\n------------\nTODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.\n\ne.g.\n1. Fork the repository on Github\n2. Create a named feature branch (like `add_component_x`)\n3. Write you change\n4. Write tests for your change (if applicable)\n5. Run the tests, ensuring they all pass\n6. Submit a Pull Request using Github\n\nLicense and Authors\n-------------------\nAuthors: TODO: List authors\n",
+  "replacing": {
+  },
+  "name": "zendserver",
+  "suggestions": {
+  },
+  "recipes": {
+    "zendserver::manage": "Manages zend server, typically no direct actions",
+    "zendserver::install": "Adds the Zend Server repo and installs the package",
+    "zendserver::igbinary": "Install igbinary module",
+    "zendserver::bootstrapsingle": "Bootstraps the server in single server mode",
+    "zendserver::gearman": "Install gearman module"
+  },
+  "license": "All rights reserved",
+  "maintainer_email": "maurice.k@zend.com",
+  "version": "0.7.34",
+  "attributes": {
+    "zendserver/adminpassword": {
+      "display_name": "Admin password",
+      "required": "required",
+      "recipes": [
+        "zendserver::bootstrapsingle"
+      ],
+      "description": "Zend Server GUI admin password",
+      "choice": [
+
+      ],
+      "type": "string",
+      "calculated": false
+    },
+    "zendserver/apikeysecret": {
+      "display_name": "Api key secret",
+      "required": "required",
+      "recipes": [
+        "zendserver::bootstrapsingle",
+        "zendserver::manage"
+      ],
+      "description": "An API key secret we can sbsequenly use (64 chars)",
+      "choice": [
+
+      ],
+      "type": "string",
+      "calculated": false
+    },
+    "zendserver/phpversion": {
+      "display_name": "PHP version",
+      "default": "5.4",
+      "required": "optional",
+      "recipes": [
+        "zendserver::install"
+      ],
+      "description": "The PHP version to install - must be a valid PHP version for the Zend Server selected version",
+      "choice": [
+
+      ],
+      "type": "string",
+      "calculated": false
+    },
+    "zendserver/production": {
+      "display_name": "Production mode",
+      "default": "TRUE",
+      "required": "optional",
+      "recipes": [
+        "zendserver::bootstrapsingle"
+      ],
+      "description": "Whether to set Zend Server up as a development or production server (Monitoring rules, agregation, ...).",
+      "choice": [
+        "TRUE",
+        "FALSE"
+      ],
+      "type": "string",
+      "calculated": false
+    },
+    "zendserver/devpassword": {
+      "display_name": "Developer password",
+      "required": "optional",
+      "recipes": [
+        "zendserver::bootstrapsingle"
+      ],
+      "description": "Developer's account password",
+      "choice": [
+
+      ],
+      "type": "string",
+      "calculated": false
+    },
+    "zendserver/adminemail": {
+      "display_name": "Admin Email",
+      "required": "optional",
+      "recipes": [
+        "zendserver::bootstrapsingle"
+      ],
+      "description": "Administrator's email (to send alerts to)",
+      "choice": [
+
+      ],
+      "type": "string",
+      "calculated": false
+    },
+    "zendserver/licensekey": {
+      "display_name": "License key",
+      "required": "required",
+      "recipes": [
+        "zendserver::bootstrapsingle"
+      ],
+      "description": "Zend Server license key",
+      "choice": [
+
+      ],
+      "type": "string",
+      "calculated": false
+    },
+    "zendserver/version": {
+      "display_name": "Zend Server version",
+      "default": "6.1",
+      "required": "optional",
+      "recipes": [
+        "zendserver::install"
+      ],
+      "description": "The version to install - must be a valid repository version",
+      "choice": [
+
+      ],
+      "type": "string",
+      "calculated": false
+    },
+    "zendserver/apikeyname": {
+      "display_name": "Api key name",
+      "default": "rightscale",
+      "required": "optional",
+      "recipes": [
+        "zendserver::bootstrapsingle",
+        "zendserver::manage"
+      ],
+      "description": "An API key we can subsequently use",
+      "choice": [
+
+      ],
+      "type": "string",
+      "calculated": false
+    },
+    "zendserver/ordernumber": {
+      "display_name": "Order number",
+      "required": "required",
+      "recipes": [
+        "zendserver::bootstrapsingle"
+      ],
+      "description": "Zend Server license order number",
+      "choice": [
+
+      ],
+      "type": "string",
+      "calculated": false
+    }
+  },
+  "maintainer": "Zend Technologies",
+  "description": "Installs/Configures zendserver",
+  "groupings": {
+  },
+  "recommendations": {
+  },
+  "dependencies": {
+    "apt": ">= 0.0.0",
+    "rightscale": ">= 0.0.0"
+  }
+}
