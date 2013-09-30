@@ -17,10 +17,8 @@ Requirements
 
 Attributes
 ----------
-TODO: List you cookbook attributes here.
 
-e.g.
-#### zendserver::default
+#### zendserver::single
 <table>
   <tr>
     <th>Key</th>
@@ -75,6 +73,18 @@ e.g.
     <td>string</td>
     <td>An email address for the Zend Server admin</td>
     <td><tt>-</tt></td>
+  </tr>
+</table>
+
+#### zendserver::cluster
+Requires all the attributes listed for single, plus a valid MySQL database.
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
   </tr>
   <tr>
     <td><tt>['zendserver']['dbhost']</tt></td>
