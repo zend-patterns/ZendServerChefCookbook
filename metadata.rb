@@ -4,13 +4,15 @@ maintainer_email 'maurice.k@zend.com'
 license          'All rights reserved'
 description      'Installs/Configures zendserver'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.7.35'
+version          '0.8.0'
 
 depends "apt"
 depends "yum"
 # depends "rightscale"
 
 recipe "zendserver", "Adds the Zend Server repo and installs the package"
+recipe "zendserver::single", "Install & bootstrap in 1 step"
+recipe "zendserver::cluster", "Install, bootstrap and create/join a cluster in 1 step"
 recipe "zendserver::manage", "Manages zend server, typically no direct actions"
 recipe "zendserver::bootstrapsingle", "Bootstraps the server in single server mode"
 recipe "zendserver::joincluster", "Join a Zend Server Cluster"
@@ -100,4 +102,28 @@ attribute "zendserver/devpassword",
   :required	=> "optional",
   :recipes		=> [
   	"zendserver::bootstrapsingle"
+  ]
+
+attribute "zendserver/dbhost",
+  :display_name => "Database Host name/IP",
+  :description  => "A valid MySQL database for the clustering functionality.",
+  :required => "optional",
+  :recipes    => [
+    "zendserver::joincluster"
+  ]
+
+attribute "zendserver/dbusername",
+  :display_name => "MySQL username",
+  :description  => "The MySQL username",
+  :required => "optional",
+  :recipes    => [
+    "zendserver::joincluster"
+  ]
+
+attribute "zendserver/dbpassword",
+  :display_name => "MySQL password",
+  :description  => "The MySQL password",
+  :required => "optional",
+  :recipes    => [
+    "zendserver::joincluster"
   ]
