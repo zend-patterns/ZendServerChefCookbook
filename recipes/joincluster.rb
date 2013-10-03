@@ -18,4 +18,6 @@ log "Adding server node to cluster"
 execute "cluster-join-server" do
 	command join_command
 	ignore_failure false
+	retries 5
+	retry_delay 3
 end

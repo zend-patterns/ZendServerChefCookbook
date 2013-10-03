@@ -1,0 +1,75 @@
+Request.WebAPI = new Class({
+	Extends: Request.JSON,
+	initialize: function(options) {
+		options.noCache = true; // Fix for ZSRV-10761
+        this.parent(options);
+        var accept = 'application/vnd.zend.serverapi+json';
+        if (options.version != undefined) {
+            accept += (';version=' + options.version);
+        }
+
+		Object.append(this.headers, {
+            'X-Accept': accept
+        });
+
+		this.addEvent('failure', function(response) {
+			var responseData = this.decodeResponse(response);
+			
+			/// session expired, could not validate the request
+			if (responseData && responseData.errorData.errorCode == 'malformedRequest' && (! location.pathname.match('/Login'))) {
+				document.fireEvent('toastAlert', {'message': _t('Session expired, redirecting to login')});
+				this.redirectToLogin.delay(2000);
+			}
+		}.bind(this));
+	},
+	redirectToLogin: function() {
+		location = baseUrl() + '/Login?redirectTo=' + encodeURIComponent(location.href);
+	},
+	decodeResponse: function(response) {
+		var responseData = '';
+		if (JSON.validate(response.responseText)) {
+			responseData = JSON.decode(response.responseText);
+		}
+		if (! responseData) {
+			return {'errorData': {'errorCode': '', 'errorMessage': ''}};
+		}
+		return responseData;
+	}
+});
+
+Request.WebAPI.TasksPolling = new Class({
+	'Extends': Request.WebAPI,
+	'initialize': function(options) {
+		if (options.onPollingDone) {
+			this.addEvent('tasksComplete', options.onPollingDone);
+			delete options.onPollingDone;
+		}
+		
+		if (options.onPollingFail) {
+			this.addEvent('tasksCompleteFail', options.onPollingFail);
+			delete options.onPollingFail;
+		} else {
+			this.addEvent('tasksCompleteFail', options.onFailure);
+		}
+		
+		options.onSuccess = function() {
+			var url = baseUrl() + '/Api/tasksComplete';
+			var request = new Request.WebAPI({
+				url: url,
+				data:{},
+				onSuccess: function(response) {
+		    		if (undefined != response && response.responseData.tasksComplete == true) {
+		    			this.fireEvent('tasksComplete', response);
+		    		} else {
+		    			this.fireEvent.delay('700', this, ['success']);
+		    		}
+				}.bind(this),
+				onFailure: function(response) {
+					this.fireEvent('tasksCompleteFail', response);
+				}
+			}).get();
+		}.bind(this);
+		
+		this.parent(options);
+	},
+});

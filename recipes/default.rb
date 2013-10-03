@@ -54,6 +54,15 @@ package package_name do
 	:install
 end
 
+#HOT FIX for bug ZSRV-10761 at line 4
+# options.noCache = true;
+template "/usr/local/zend/gui/public/js/zswebapi.js" do
+  source "zswebapi.js.erb"
+  mode 0644
+  owner "root"
+  group "root"
+end
+
 # Problem with CentOS api functions if server not restarted
 service "zend-server" do
 	action :restart

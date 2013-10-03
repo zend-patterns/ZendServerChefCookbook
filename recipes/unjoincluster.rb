@@ -11,4 +11,6 @@ log "Removing server node #{node['hostname']} from cluster"
 execute "cluster-unjoin-server" do
 	command unjoin_command
 	ignore_failure false
+	retries 5
+	retry_timeout 3
 end
