@@ -12,5 +12,5 @@ execute "cluster-unjoin-server" do
 	command unjoin_command
 	ignore_failure false
 	retries 5
-	retry_timeout 3
+	retry_delay 3
 end
