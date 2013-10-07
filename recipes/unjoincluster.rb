@@ -7,6 +7,7 @@ node_id = get_node_id_by_name(node['hostname'], key_name, key_secret)
 unjoin_command = "#{node[:zendserver][:zsmanage]} cluster-remove-server #{node_id} -N #{key_name} -K #{key_secret} -s"
 
 log "Removing server node #{node['hostname']} from cluster"
+log "command: #{unjoin_command}"
 
 execute "cluster-unjoin-server" do
 	command unjoin_command
