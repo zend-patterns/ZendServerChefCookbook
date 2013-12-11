@@ -25,9 +25,9 @@ when "debian"
   include_recipe "apt::default"
   # do things on debian-ish platforms (debian, ubuntu, linuxmint)
 
-	log "Url: #{url}/#{version}/#{basedirdeb}/"
+	log "Url: #{url}#{version}/#{basedirdeb}/"
 	apt_repository "zend-server" do
-	  uri "#{url}/#{version}/#{basedirdeb}/"
+	  uri "#{url}#{version}/#{basedirdeb}/"
 	  components ["server","non-free"]
 	  key "http://repos.zend.com/zend.key"
 	  action :add
