@@ -184,7 +184,7 @@ end
 
 def get_extension_dir()
   @extension_dir ||= begin
-    p = shell_out("php-config --extension-dir")
+    p = shell_out("/usr/local/zend/bin/php-config --extension-dir")
     p.stdout.strip
   end
 end

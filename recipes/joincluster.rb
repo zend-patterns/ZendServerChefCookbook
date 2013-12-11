@@ -5,15 +5,19 @@ key_secret   = node[:zendserver][:apikeysecret]
 db_host 	 = node[:zendserver][:dbhost]
 db_user 	 = node[:zendserver][:dbusername]
 db_pass 	 = node[:zendserver][:dbpassword]
+node_ip      = node[:zendserver][:node_ip].nil? ? node['ipaddress'] : node[:zendserver][:node_ip]
+
+Log "Using ip: #{node_ip}"
 
 # check before install that a suitable key is provided, if not bail out
 Chef::Application.fatal!("Zend Server db_host missing", 2) if db_host.nil? || db_host.empty?
 Chef::Application.fatal!("Zend Server db_user missing", 2) if db_user.nil? || db_user.empty?
 Chef::Application.fatal!("Zend Server db_pass missing", 2) if db_pass.nil? || db_pass.empty?
 
-join_command = "#{node[:zendserver][:zsmanage]} server-add-to-cluster -N #{key_name} -K #{key_secret} -n #{node['hostname']} -i #{node['ipaddress']} -o #{db_host} -u #{db_user} -p #{db_pass} -s"
+join_command = "#{node[:zendserver][:zsmanage]} server-add-to-cluster -N #{key_name} -K #{key_secret} -U http://#{node[:hostname]}:10081/ZendServer/ -n #{node['hostname']} -i #{node_ip} -o #{db_host} -u #{db_user} -p #{db_pass} -s"
 
 log "Adding server node to cluster"
+log "Executing #{join_command}"
 
 execute "cluster-join-server" do
 	command join_command

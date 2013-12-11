@@ -17,6 +17,15 @@ recipe "zendserver::manage", "Manages zend server, typically no direct actions"
 recipe "zendserver::bootstrapsingle", "Bootstraps the server in single server mode"
 recipe "zendserver::joincluster", "Join a Zend Server Cluster"
 
+attribute "zendserver/url",
+  :display_name => "Zend Server Base repo URL",
+  :description => "The URL of the repo",
+  :required => "optional",
+  :default => "http://repos.zend.com/zend-server/",
+  :recipes => [ 
+      "zendserver::install"
+  ]
+
 attribute "zendserver/version",
   :display_name => "Zend Server version",
   :description => "The version to install - must be a valid repository version",

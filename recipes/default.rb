@@ -14,6 +14,9 @@ Chef::Application.fatal!("Zend Server Serial has to be supplied", 2) if node[:ze
 
 version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]
+url = node[:zendserver][:url]
+basedirdeb = node[:zendserver][:basedirdeb]
+basedirrpm = node[:zendserver][:basedirrpm]
 
 package_name = "zend-server-php-#{phpversion}"
 
@@ -21,9 +24,10 @@ case node["platform_family"]
 when "debian"
   include_recipe "apt::default"
   # do things on debian-ish platforms (debian, ubuntu, linuxmint)
-	log "Url: http://repos.zend.com/zend-server/#{version}/deb/"
+
+	log "Url: #{url}/#{version}/#{basedirdeb}/"
 	apt_repository "zend-server" do
-	  uri "http://repos.zend.com/zend-server/#{version}/deb/"
+	  uri "#{url}/#{version}/#{basedirdeb}/"
 	  components ["server","non-free"]
 	  key "http://repos.zend.com/zend.key"
 	  action :add
@@ -38,13 +42,13 @@ when "rhel"
   # do things on RHEL platforms (redhat, centos, scientific, etc)
   yum_repository "zend-server" do
 	description "Zend Server repo"
-	url "http://repos.zend.com/zend-server/#{version}/rpm/$basearch"
+	url "#{url}/#{version}/#{basedirrpm}/$basearch"
   	action :add
   end
 
   yum_repository "zend-server-noarch" do
 	description "Zend Server repo"
-	url "http://repos.zend.com/zend-server/#{version}/rpm/noarch"
+	url "#{url}/#{version}/#{basedirrpm}/noarch"
   	action :add
   end
 end
@@ -56,12 +60,12 @@ end
 
 #HOT FIX for bug ZSRV-10761 at line 4
 # options.noCache = true;
-template "/usr/local/zend/gui/public/js/zswebapi.js" do
-  source "zswebapi.js.erb"
-  mode 0644
-  owner "root"
-  group "root"
-end
+#template "/usr/local/zend/gui/public/js/zswebapi.js" do
+#  source "zswebapi.js.erb"
+#  mode 0644
+#  owner "root"
+#  group "root"
+#end
 
 # Problem with CentOS api functions if server not restarted
 service "zend-server" do
