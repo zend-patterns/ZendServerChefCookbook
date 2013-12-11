@@ -30,7 +30,7 @@ Attributes
     <td><tt>['zendserver']['version']</tt></td>
     <td>string</td>
     <td>Zend Server version to install</td>
-    <td><tt>6.1</tt></td>
+    <td><tt>6.2</tt></td>
   </tr>
   <tr>
     <td><tt>['zendserver']['phpversion']</tt></td>
