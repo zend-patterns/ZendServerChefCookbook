@@ -16,12 +16,12 @@ Chef::Application.fatal!("Zend Server db_pass missing", 2) if db_pass.nil? || db
 
 join_command = "#{node[:zendserver][:zsmanage]} server-add-to-cluster -N #{key_name} -K #{key_secret} -U http://#{node[:hostname]}:10081/ZendServer/ -n #{node['hostname']} -i #{node_ip} -o #{db_host} -u #{db_user} -p #{db_pass} -s"
 
-log "Adding server node to cluster"
-log "Executing #{join_command}"
+log "Adding server node to cluster - Executing #{join_command}" if !is_node_joined(key_name, key_secret)
 
 execute "cluster-join-server" do
 	command join_command
 	ignore_failure false
 	retries 5
 	retry_delay 3
+	not_if { is_node_joined(key_name, key_secret) }
 end

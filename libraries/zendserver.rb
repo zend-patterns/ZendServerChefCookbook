@@ -15,3 +15,9 @@ def is_server_bootstrapped(keyname, secret)
 	p = shell_out(system_info)
 	!p.stderr.include?  "Bootstrap is needed"
 end
+
+def is_node_joined(keyname, secret)
+	system_info = "#{node[:zendserver][:zsmanage]} system-info -N #{keyname} -K #{secret} -U http://#{node[:hostname]}:10081/ZendServer/"
+	p = shell_out(system_info)
+	p.stdout.include?  "ZendServerCluster"
+end
