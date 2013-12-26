@@ -8,10 +8,6 @@
 #
 log "adding repository"
 
-# check before install that a suitable key is provided, if not bail out
-Chef::Application.fatal!("Zend Server Order number has to be supplied", 2) if node[:zendserver][:ordernumber].nil? || node[:zendserver][:ordernumber].empty?
-Chef::Application.fatal!("Zend Server Serial has to be supplied", 2) if node[:zendserver][:licensekey].nil? || node[:zendserver][:licensekey].empty?
-
 version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]
 url = node[:zendserver][:url]
