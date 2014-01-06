@@ -12,7 +12,11 @@ end
 
 def is_server_bootstrapped(keyname, secret)
 	system_info = "#{node[:zendserver][:zsmanage]} system-info -N #{keyname} -K #{secret} -U http://#{node[:hostname]}:10081/ZendServer/"
+	Chef::Log.info(system_info)
 	p = shell_out(system_info)
+	Chef::Log.info("OUT: #{p.stdout}")
+	Chef::Log.info("ERR: #{p.stderr}")
+	
 	!p.stderr.include?  "Bootstrap is needed"
 end
 

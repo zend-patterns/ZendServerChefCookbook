@@ -8,6 +8,10 @@
 #
 log "adding repository"
 
+# check before install that a suitable key is provided, if not bail out
+# Chef::Application.fatal!("Zend Server Order number has to be supplied", 2) if node[:zendserver][:ordernumber].nil? || node[:zendserver][:ordernumber].empty?
+# Chef::Application.fatal!("Zend Server Serial has to be supplied", 2) if node[:zendserver][:licensekey].nil? || node[:zendserver][:licensekey].empty?
+
 version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]
 url = node[:zendserver][:url]
@@ -52,6 +56,7 @@ end
 log "Starting install for package #{package_name}"
 package package_name do
 	:install
+  notifies :restart, 'service[zend-server]', :immediate if node["platform_family"] == "rhel"
 end
 
 #HOT FIX for bug ZSRV-10761 at line 4
@@ -65,5 +70,5 @@ end
 
 # Problem with CentOS api functions if server not restarted
 service "zend-server" do
-	action :restart
+	action :nothing
 end
