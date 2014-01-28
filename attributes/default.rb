@@ -6,7 +6,7 @@ default['zendserver']['url'] = 'http://repos.zend.com/zend-server/'
 default['zendserver']['basedirdeb'] = 'deb'
 default['zendserver']['basedirrpm'] = 'rpm'
 
-default['zendserver']['version'] = '6.1'
+default['zendserver']['version'] = '6.2'
 default['zendserver']['phpversion'] = '5.4'
 
 # GUI default passwords
