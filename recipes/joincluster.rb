@@ -1,27 +1,27 @@
 #This recipe is used to join a cluster of Zend Servers
 
-key_name 	 = node[:zendserver][:apikeyname]
-key_secret   = node[:zendserver][:apikeysecret]
-db_host 	 = node[:zendserver][:dbhost]
-db_user 	 = node[:zendserver][:dbusername]
-db_pass 	 = node[:zendserver][:dbpassword]
-node_ip      = node[:zendserver][:node_ip].nil? ? node['ipaddress'] : node[:zendserver][:node_ip]
+ruby_block "server add to cluster" do
+  block do
+    apikeyname       = node[:zendserver][:chef_admin_apikeyname]
+    apikeysecret     = node[:zendserver][:chef_admin_apikeysecret]   
+    dbhost           = node[:zendserver][:dbhost]
+    dbusername       = node[:zendserver][:dbusername]
+    dbpassword       = node[:zendserver][:dbpassword]
+    node_ip          = node[:zendserver][:node_ip].nil? ? node['ipaddress'] : node[:zendserver][:node_ip]
 
-Log "Using ip: #{node_ip}"
-
-# check before install that a suitable key is provided, if not bail out
-Chef::Application.fatal!("Zend Server db_host missing", 2) if db_host.nil? || db_host.empty?
-Chef::Application.fatal!("Zend Server db_user missing", 2) if db_user.nil? || db_user.empty?
-Chef::Application.fatal!("Zend Server db_pass missing", 2) if db_pass.nil? || db_pass.empty?
-
-join_command = "#{node[:zendserver][:zsmanage]} server-add-to-cluster -N #{key_name} -K #{key_secret} -U http://#{node[:hostname]}:10081/ZendServer/ -n #{node['hostname']} -i #{node_ip} -o #{db_host} -u #{db_user} -p #{db_pass} -s"
-
-log "Adding server node to cluster - Executing #{join_command}" if !is_node_joined(key_name, key_secret)
-
-execute "cluster-join-server" do
-	command join_command
-	ignore_failure false
-	retries 5
-	retry_delay 3
-	not_if { is_node_joined(key_name, key_secret) }
+    # check before install that a suitable key is provided, if not bail out
+    Chef::Application.fatal!("Zend Server API Key Name missing", 2) if apikeyname.nil? || apikeyname.empty?
+    Chef::Application.fatal!("Zend Server API Key Secret missing", 2) if apikeysecret.nil? || apikeysecret.empty? || apikeysecret == "00000"
+    Chef::Application.fatal!("Zend Server dbhost missing", 2) if dbhost.nil? || dbhost.empty?
+    Chef::Application.fatal!("Zend Server dbhost missing", 2) if dbhost.nil? || dbhost.empty?
+    Chef::Application.fatal!("Zend Server dbusername missing", 2) if dbusername.nil? || dbusername.empty?
+    Chef::Application.fatal!("Zend Server dbpassword missing", 2) if dbpassword.nil? || dbpassword.empty?
+    
+    join_command = "#{node[:zendserver][:zsmanage]} server-add-to-cluster -N #{apikeyname} -K #{apikeysecret} -n #{node['hostname']} -i #{node_ip} -o #{dbhost} -u #{dbusername} -p #{dbpassword} -s"
+    p = Chef::Mixin::ShellOut.shell_out(join_command)
+    
+    node.set[:zendserver][:chef_admin_apikeyname] = p.stdout.split(/\n/).grep(/WEB_API_KEY/)[0].split(/=/)[1].strip()
+    node.set[:zendserver][:chef_admin_apikeysecret] = p.stdout.split(/\n/).grep(/WEB_API_KEY_HASH/)[0].split(/=/)[1].strip()
+  end
+  not_if { is_node_joined(node[:zendserver][:chef_admin_apikeyname], node[:zendserver][:chef_admin_apikeysecret]) }
 end
