@@ -65,7 +65,7 @@ Attributes
   <tr>
     <td><tt>['zendserver']['apikeyname']</tt></td>
     <td>string</td>
-    <td>Name fort the web API key that the installer creates. The api key is required for all management functionality</td>
+    <td>Name for the web API key that the installer creates. The api key is required for all management functionality</td>
     <td>Yes</td>
     <td><tt>-</tt></td>
   </tr>
@@ -73,6 +73,13 @@ Attributes
     <td><tt>['zendserver']['apikeysecret']</tt></td>
     <td>string</td>
     <td>A 64 character key used for signing API requests</td>
+    <td>Yes</td>
+    <td><tt>-</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['zendserver']['adminpassword']</tt></td>
+    <td>string</td>
+    <td>A 4-20 character password for the admin user (use this to log into the Zend Server GUI)</a</td>
     <td>Yes</td>
     <td><tt>-</tt></td>
   </tr>
