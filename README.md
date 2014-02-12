@@ -79,9 +79,9 @@ Attributes
   <tr>
     <td><tt>['zendserver']['adminpassword']</tt></td>
     <td>string</td>
-    <td>A 4-20 character password for the admin user (use this to log into the Zend Server GUI)</a</td>
-    <td>Yes</td>
-    <td><tt>-</tt></td>
+    <td>A 4-20 character password for the admin user (use this to log into the Zend Server GUI).</a</td>
+    <td>No</td>
+    <td><tt>p2ssw0rd1</tt></td>
   </tr>
   <tr>
     <td><tt>['zendserver']['adminemail']</tt></td>
@@ -193,7 +193,7 @@ Contributing
 #### e.g.
   1. Fork the repository on Github
   2. Create a named feature branch (like `add_component_x`)
-  3. Write you change
+  3. Write your change
   4. Write tests for your change (if applicable)
   5. Run the tests, ensuring they all pass
   6. Submit a Pull Request using Github
