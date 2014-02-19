@@ -2,7 +2,7 @@ require 'chef/mixin/shell_out'
 require 'chef/mixin/language'
 include Chef::Mixin::ShellOut
 
-use_inline_resources
+use_inline_resources if defined?(use_inline_resources)
 
 action :enable do
 	p=shell_out("#{node[:zendserver][:zsmanage]} extension-on -e #{@new_resource.name} -N #{node[:zendserver][:apikeyname]} -K #{node[:zendserver][:apikeysecret]}")
