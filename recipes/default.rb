@@ -14,12 +14,13 @@ Chef::Application.fatal!("Zend Server Serial has to be supplied", 2) if node[:ze
 
 version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]
-nginx = node[:zendserver][:nginx]
 
 case node[:zendserver][:nginx]
-when "true"
-  package_name = "zend-server-nginx-php-#{phpversion}"
-when "false"  
+when 'TRUE'
+package_name = "zend-server-nginx-php-#{phpversion}"
+when 'FALSE'
+package_name = "zend-server-php-#{phpversion}"
+else
 package_name = "zend-server-php-#{phpversion}"
 end
 
