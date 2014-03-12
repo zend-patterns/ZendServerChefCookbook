@@ -16,9 +16,9 @@ version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]
 
 case node[:zendserver][:nginx]
-when 'TRUE'
+when true
 package_name = "zend-server-nginx-php-#{phpversion}"
-when 'FALSE'
+when false
 package_name = "zend-server-php-#{phpversion}"
 else
 package_name = "zend-server-php-#{phpversion}"
