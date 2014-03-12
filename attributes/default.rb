@@ -5,7 +5,7 @@ default['zendserver']['version'] = '6.1'
 default['zendserver']['phpversion'] = '5.4'
 
 # In case we want Nginx instead of Apache
-default['zendserver']['nginx'] = 'TRUE'
+default['zendserver']['nginx'] = ''
 
 # GUI default passwords
 default['zendserver']['adminpassword'] = 'p2ssw0rd1'

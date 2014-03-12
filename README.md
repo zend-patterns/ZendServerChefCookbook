@@ -39,6 +39,12 @@ Attributes
     <td><tt>5.4</tt></td>
   </tr>
   <tr>
+    <td><tt>['zendserver']['nginx']</tt></td>
+    <td>boolean</td>
+    <td>Set in you are using Nginx instead of Apache</td>
+    <td><tt>FALSE</tt></td>
+  </tr>
+  <tr>
     <td><tt>['zendserver']['ordernumber']</tt></td>
     <td>string</td>
     <td>The order number part of the license information</td>
