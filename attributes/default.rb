@@ -4,6 +4,9 @@ default['zendserver']['zsmanage']  = '/usr/local/zend/bin/zs-manage'
 default['zendserver']['version'] = '6.1'
 default['zendserver']['phpversion'] = '5.4'
 
+# In case we want Nginx instead of Apache
+default['zendserver']['nginx'] = 'TRUE'
+
 # GUI default passwords
 default['zendserver']['adminpassword'] = 'p2ssw0rd1'
 

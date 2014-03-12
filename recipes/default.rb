@@ -14,8 +14,14 @@ Chef::Application.fatal!("Zend Server Serial has to be supplied", 2) if node[:ze
 
 version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]
+nginx = node[:zendserver][:nginx]
 
+case node[:zendserver][:nginx]
+when "true"
+  package_name = "zend-server-nginx-php-#{phpversion}"
+when "false"  
 package_name = "zend-server-php-#{phpversion}"
+end
 
 case node["platform_family"]
 when "debian"
