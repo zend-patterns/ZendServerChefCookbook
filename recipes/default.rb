@@ -18,7 +18,14 @@ url = node[:zendserver][:url]
 basedirdeb = node[:zendserver][:basedirdeb]
 basedirrpm = node[:zendserver][:basedirrpm]
 
+case node[:zendserver][:nginx]
+when true
+package_name = "zend-server-nginx-php-#{phpversion}"
+when false
 package_name = "zend-server-php-#{phpversion}"
+else
+package_name = "zend-server-php-#{phpversion}"
+end
 
 case node["platform_family"]
 when "debian"
