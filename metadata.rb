@@ -45,6 +45,15 @@ attribute "zendserver/phpversion",
       "zendserver::install"
   ]
 
+attribute "zendserver/nginx",
+  :display_name => "Nginx true or not",
+  :description => "Set if you are using Nginx instead of Apache true or false boolean",
+  :required => "optional",
+  :default => false,
+  :recipes => [ 
+      "zendserver::install"
+  ]
+
 attribute "zendserver/adminpassword",
   :display_name => "Admin password",
   :description  => "Zend Server GUI admin password",
