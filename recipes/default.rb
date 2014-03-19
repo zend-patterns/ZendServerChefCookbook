@@ -52,16 +52,25 @@ when "rhel"
   end
   # Do things on Suse using Zypper
   
-#  yum_repository "zend-server-noarch" do
-#	description "Zend Server repo"
-#	url "http://repos.zend.com/zend-server/#{version}/rpm/noarch"
-#  	action :add
-#  end
+  yum_repository "zend-server-noarch" do
+	description "Zend Server repo"
+	url "http://repos.zend.com/zend-server/#{version}/rpm/noarch"
+  	action :add
+  end
+
 #when "suse"
+#  include_recipe "zypper::default"
 #  zypper_repository "zend-server" do
-#    uri "http://repos.zend.com/zend-server/#{version}/sles/ZendServer-x86_64"
-#    key "http://repos.zend.com/zend.key"
-#    title "#{version}"
+#        uri "http://repos.zend.com/zend-server/#{version}/sles/ZendServer-x86_64"
+#        key "http://repos.zend.com/zend.key"
+#        title "zend-server-#{version}"
+#        action :add
+#  end
+#  zypper_repository "zend-server-noarch" do
+#        uri "http://repos.zend.com/zend-server/#{version}/sles/ZendServer-noarch"
+#        key "http://repos.zend.com/zend.key"
+#        title "zend-server-noarch-#{version}"
+#        action :add
 #  end
 #end
 
