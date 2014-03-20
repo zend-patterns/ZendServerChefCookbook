@@ -72,7 +72,7 @@ when "rhel"
 #        title "zend-server-noarch-#{version}"
 #        action :add
 #  end
-#end
+end
 
 log "Starting install for package #{package_name}"
 package package_name do
