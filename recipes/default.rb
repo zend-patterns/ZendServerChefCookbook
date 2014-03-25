@@ -58,10 +58,17 @@ when "rhel"
   	action :add
   end
 when "suse"
-  zypper_repository "zend-server" do
-    uri "http://repos.zend.com/zend-server/#{version}/sles/ZendServer-x86_64"
-    key "http://repos.zend.com/zend.key"
-    title "#{version}"
+  zendserver_repository "zend-server" do
+        uri "http://repos.zend.com/zend-server/#{version}/sles/ZendServer-x86_64"
+        key "http://repos.zend.com/zend.key"
+        title "zend-server-#{version}"
+        action :add
+  end
+  zendserver_repository "zend-server-noarch" do
+        uri "http://repos.zend.com/zend-server/#{version}/sles/ZendServer-noarch"
+        key "http://repos.zend.com/zend.key"
+        title "zend-server-noarch-#{version}"
+        action :add
   end
 end
 

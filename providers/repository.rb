@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: zendserver 
+# Cookbook Name:: zend-server 
 # Provider:: repository
 #
 # Once there is build in zypper repository support in Chef we can relay of it. 
