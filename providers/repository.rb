@@ -6,13 +6,13 @@
 # For now have to take care of it inside zendserver cookbook. 
 #
 
-action :add do    
+action :add do
   if new_resource.key && (new_resource.key =~ /http/)
     execute "rpm_import_#{Digest::MD5.hexdigest(new_resource.key)}" do
       command "rpm --import #{new_resource.key}"
-  else
-    Chef::Log.error "Can't import #{new_resource.key}"
     end
+ else
+    Chef::Log.error "Can't import #{new_resource.key}"
   end
 
   if ::File.exists? "/etc/zypp/repos.d/rp-#{new_resource.alias}.repo"
