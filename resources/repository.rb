@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: zendserver
+# Cookbook Name:: zend-server
 # Resource:: repository
 #
-#
+
 
 actions :add, :remove, :refresh
 
