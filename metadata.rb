@@ -48,7 +48,7 @@ attribute "zendserver/nginx",
   :display_name => "Nginx true or not",
   :description => "Set if you are using Nginx instead of Apache true or false boolean",
   :required => "optional",
-  :default => false,
+  :default => 'false',
   :recipes => [ 
       "zendserver::install"
   ]
