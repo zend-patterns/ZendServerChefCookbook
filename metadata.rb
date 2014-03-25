@@ -8,7 +8,6 @@ version          '1.0.0'
 
 depends "apt"
 depends "yum"
-depends "zypper"
 # depends "rightscale"
 
 recipe "zendserver", "Adds the Zend Server repo and installs the package"
