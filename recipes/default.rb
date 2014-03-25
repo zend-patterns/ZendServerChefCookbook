@@ -14,6 +14,7 @@ Chef::Application.fatal!("Zend Server Serial has to be supplied", 2) if node[:ze
 
 version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]
+cpuarch = node[:kernel][:mashine]
 
 case node[:zendserver][:nginx]
 when true 
@@ -59,7 +60,7 @@ when "rhel"
   end
 when "suse"
   zendserver_repository "zend-server" do
-        uri "http://repos.zend.com/zend-server/#{version}/sles/ZendServer-x86_64"
+        uri "http://repos.zend.com/zend-server/#{version}/sles/ZendServer-#{cpuarch}"
         key "http://repos.zend.com/zend.key"
         title "zend-server-#{version}"
         action :add
