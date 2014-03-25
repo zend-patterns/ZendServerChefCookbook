@@ -45,6 +45,7 @@ Attributes
     <td><tt>['zendserver']['nginx']</tt></td>
     <td>boolean</td>
     <td>Set in you are using Nginx instead of Apache true or false boolean</td>
+    <td>No</td>
     <td><tt>false</tt></td>
   </tr>
   <tr>
