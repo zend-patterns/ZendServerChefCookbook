@@ -14,7 +14,7 @@ Chef::Application.fatal!("Zend Server Serial has to be supplied", 2) if node[:ze
 
 version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]
-cpuarch = node[:kernel][:mashine]
+cpuarch = node[:kernel][:machine]
 
 case node[:zendserver][:nginx]
 when true 
