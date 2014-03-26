@@ -10,6 +10,7 @@ Requirements
 #### Platforms
 - Debian, Ubuntu
 - RHEL, CentOS, Oracle Linux
+- SLES, OpenSUSE
 
 #### Cookbooks
 - aptitude
@@ -45,7 +46,7 @@ Attributes
     <td><tt>['zendserver']['nginx']</tt></td>
     <td>boolean</td>
     <td>Set in you are using Nginx instead of Apache true or false boolean</td>
-    <td><tt>false</tt></td>
+    <td><tt>'false'</tt></td>
   </tr>
   <tr>
     <td><tt>['zendserver']['ordernumber']</tt></td>
