@@ -39,25 +39,23 @@ when "debian"
 	  notifies :run, "execute[apt-get update]", :immediately
     end
 when "rhel"
-  yum_key "zend-server" do
-  	url "http://repos.zend.com/zend.key"
-  	action :add
-  end
-
+  
   # do things on RHEL platforms (redhat, centos, scientific, etc)
   yum_repository "zend-server" do
-	description "Zend Server repo"
-	url "http://repos.zend.com/zend-server/#{version}/rpm/$basearch"
-  	action :add
+    description "Zend Server repo"
+    gpgkey "http://repos.zend.com/zend.key"
+    url "http://repos.zend.com/zend-server/#{version}/rpm/$basearch"
+    action :add
   end
-  # Do things on Suse using Zypper
   
   yum_repository "zend-server-noarch" do
-	description "Zend Server repo"
-	url "http://repos.zend.com/zend-server/#{version}/rpm/noarch"
-  	action :add
+    description "Zend Server repo"
+    gpgkey "http://repos.zend.com/zend.key"
+    url "http://repos.zend.com/zend-server/#{version}/rpm/noarch"
+    action :add
   end
 
+# Do things on Suse using Zypper
 #when "suse"
 #  include_recipe "zypper::default"
 #  zypper_repository "zend-server" do
