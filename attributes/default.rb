@@ -3,11 +3,11 @@ default['zendserver']['zsmanage']  = '/usr/local/zend/bin/zs-manage'
 
 #URL needs to have trailing slash
 default['zendserver']['url'] = 'http://repos.zend.com/zend-server/'
-default['zendserver']['basedirdeb'] = 'deb'
+default['zendserver']['basedirdeb'] = 'deb_apache2.4'
 default['zendserver']['basedirrpm'] = 'rpm'
 
-default['zendserver']['version'] = '6.1'
-default['zendserver']['phpversion'] = '5.4'
+default['zendserver']['version'] = '7.0'
+default['zendserver']['phpversion'] = '5.5'
 
 # In case we want Nginx instead of Apache it has to be boolean !
 default['zendserver']['nginx'] = false
