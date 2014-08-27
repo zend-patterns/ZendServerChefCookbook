@@ -23,7 +23,7 @@ attribute "zendserver/url",
   :required => "optional",
   :default => "http://repos.zend.com/zend-server/",
   :recipes => [ 
-      "zendserver::install"
+      "zendserver::default"
   ]
 
 attribute "zendserver/version",
@@ -32,7 +32,7 @@ attribute "zendserver/version",
   :required => "optional",
   :default => "6.1",
   :recipes => [ 
-      "zendserver::install"
+      "zendserver::default"
   ]
 
 attribute "zendserver/phpversion",
@@ -41,7 +41,7 @@ attribute "zendserver/phpversion",
   :required => "optional",
   :default => "5.4",
   :recipes => [ 
-      "zendserver::install"
+      "zendserver::default"
   ]
 
 attribute "zendserver/adminpassword",
@@ -76,6 +76,22 @@ attribute "zendserver/production",
   :default  => "TRUE",
   :recipes		=> [
   	"zendserver::bootstrapsingle"
+  ]
+
+attribute "zendserver/basedirdeb",
+  :display_name => "Debian base directory",
+  :description  => "The base directory to use from the repo. Useful on debian to use apache 2.4, or for early access",
+  :required => "optional",
+  :recipes    => [
+    "zendserver::default"
+  ]
+
+attribute "zendserver/basedirrpm",
+  :display_name => "RPM base directory",
+  :description  => "The base directory to use from the repo.",
+  :required => "optional",
+  :recipes    => [
+    "zendserver::default"
   ]
 
 attribute "zendserver/apikeyname",
