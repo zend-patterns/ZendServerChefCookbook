@@ -29,7 +29,7 @@ attribute "zendserver/version",
   :display_name => "Zend Server version",
   :description => "The version to install - must be a valid repository version",
   :required => "optional",
-  :default => "6.1",
+  :default => "7.0",
   :recipes => [ 
       "zendserver::default"
   ]
@@ -38,9 +38,25 @@ attribute "zendserver/phpversion",
   :display_name => "PHP version",
   :description => "The PHP version to install - must be a valid PHP version for the Zend Server selected version",
   :required => "optional",
-  :default => "5.4",
+  :default => "5.5",
   :recipes => [ 
       "zendserver::default"
+  ]
+
+attribute "zendserver/basedirdeb",
+  :display_name => "Debian base directory",
+  :description  => "The base directory to use from the repo. Useful on debian to use apache 2.4, or for early access",
+  :required => "optional",
+  :recipes    => [
+    "zendserver::default"
+  ]
+
+attribute "zendserver/basedirrpm",
+  :display_name => "RPM base directory",
+  :description  => "The base directory to use from the repo.",
+  :required => "optional",
+  :recipes    => [
+    "zendserver::default"
   ]
 
 attribute "zendserver/adminpassword",
@@ -75,22 +91,6 @@ attribute "zendserver/production",
   :default  => "TRUE",
   :recipes		=> [
   	"zendserver::bootstrapsingle"
-  ]
-
-attribute "zendserver/basedirdeb",
-  :display_name => "Debian base directory",
-  :description  => "The base directory to use from the repo. Useful on debian to use apache 2.4, or for early access",
-  :required => "optional",
-  :recipes    => [
-    "zendserver::default"
-  ]
-
-attribute "zendserver/basedirrpm",
-  :display_name => "RPM base directory",
-  :description  => "The base directory to use from the repo.",
-  :required => "optional",
-  :recipes    => [
-    "zendserver::default"
   ]
 
 attribute "zendserver/apikeyname",
