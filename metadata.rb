@@ -136,3 +136,11 @@ attribute "zendserver/dbpassword",
   :recipes    => [
     "zendserver::joincluster"
   ]
+
+attribute "zendserver/dbname",
+  :display_name => "Database name",
+  :description  => "The MySQL database name to use (Default: ZendServer)",
+  :required => "optional",
+  :recipes    => [
+    "zendserver::joincluster"
+  ]
