@@ -4,11 +4,10 @@ maintainer_email 'maurice.k@zend.com'
 license          'All rights reserved'
 description      'Installs/Configures zendserver'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.0.0'
+version          '1.1.0'
 
 depends "apt"
 depends "yum"
-# depends "rightscale"
 
 recipe "zendserver", "Adds the Zend Server repo and installs the package"
 recipe "zendserver::single", "Install & bootstrap in 1 step"
