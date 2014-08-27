@@ -35,20 +35,17 @@ when "debian"
     notifies :run, "execute[apt-get update]", :immediately
     end
 when "rhel"
-  yum_key "zend-server" do
-    url "http://repos.zend.com/zend.key"
-    action :add
-  end
-
   # do things on RHEL platforms (redhat, centos, scientific, etc)
   yum_repository "zend-server" do
-  description "Zend Server repo"
-  url "#{url}/#{version}/#{basedirrpm}/$basearch"
+    description "Zend Server repo"
+    gpgkey "http://repos.zend.com/zend.key"
+    url "#{url}/#{version}/#{basedirrpm}/$basearch"
     action :add
   end
 
   yum_repository "zend-server-noarch" do
   description "Zend Server repo"
+  gpgkey "http://repos.zend.com/zend.key"
   url "#{url}/#{version}/#{basedirrpm}/noarch"
     action :add
   end
