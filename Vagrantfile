@@ -36,6 +36,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
 
+  # HTTP and Zend Server ports
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 10081, host: 10081
+
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
@@ -73,16 +77,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.berkshelf.except = []
 
   config.vm.provision :chef_solo do |chef|
+    chef.verbose_logging    = "true" 
+    chef.log_level          = :debug  
+    
     chef.json = {
-      mysql: {
-        server_root_password: 'rootpass',
-        server_debian_password: 'debpass',
-        server_repl_password: 'replpass'
+      zendserver: {
+        version: "7.0",
+        phpversion: "5.5",
+        basedirdeb: "deb_apache2.4", #see http://repos.zend.com/zend-server/7.0/
+        adminpassword: "12345678",
+        production: "false", # string
+        apikeyname: "my_key",
+        apikeysecret: "aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllllmmmmnnnnoooopppp" # Needs to be 64 alnum characters
       }
     }
 
     chef.run_list = [
-        "recipe[zendserver::default]"
+        "recipe[zendserver::single]"
     ]
   end
 end
