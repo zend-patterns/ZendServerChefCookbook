@@ -4,7 +4,7 @@ maintainer_email 'maurice.k@zend.com'
 license          'All rights reserved'
 description      'Installs/Configures zendserver'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.1.1'
+version          '1.1.2'
 
 depends "apt"
 depends "yum"
@@ -118,6 +118,14 @@ attribute "zendserver/adminemail",
   :required	=> "optional",
   :recipes		=> [
   	"zendserver::bootstrapsingle"
+  ]
+
+attribute "zendserver/nginx",
+  :display_name => "nginx web server",
+  :description  => "Install nginx instead of Apache",
+  :required	=> "optional",
+  :recipes		=> [
+  	"zendserver::default"
   ]
 
 attribute "zendserver/devpassword",
