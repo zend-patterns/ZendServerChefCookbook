@@ -1,5 +1,5 @@
 # Restart in zs-manage is restart after 6.2
-restart = Chef::VersionConstraint.new(">= 6.2").include?(node[:zendserver][:version]) ? "restart" : "restart-php"
+restart = (/^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)$/.match(node[:zendserver][:version]) && Chef::VersionConstraint.new(">= 6.2").include?(node[:zendserver][:version])) ? "restart" : "restart-php"
 
 execute "restart-api" do
   action :nothing

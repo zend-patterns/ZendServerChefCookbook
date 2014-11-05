@@ -37,8 +37,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
 
   # HTTP and Zend Server ports
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 10081, host: 10081
+  config.vm.network "forwarded_port", guest: 80, host: 8083
+  config.vm.network "forwarded_port", guest: 10081, host: 10083
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
