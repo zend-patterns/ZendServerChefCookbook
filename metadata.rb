@@ -4,7 +4,7 @@ maintainer_email 'maurice.k@zend.com'
 license          'All rights reserved'
 description      'Installs/Configures zendserver'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.1.3'
+version          '1.1.4'
 
 depends "apt"
 depends "yum"
