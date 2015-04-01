@@ -4,6 +4,10 @@ This cookbook installs and manages Zend Server
 
 It allows bootstrapping Zend Server in single server mode or cluster mode.
 
+IMPORTANT
+---
+By using this cookbook you agree to the Zend Server EULA. It will automatically be accepted **by default** in the install process.
+
 Requirements
 ------------
 
@@ -21,12 +25,13 @@ Attributes
 #### zendserver::single
 Key | Type | Description | Required | Default
 --- | --- | --- | --- | --- |
-`['zendserver']['version']` | string | Zend Server version to install | Yes | `6.1`
-`['zendserver']['phpversion']` | string | PHP version to install | Yes | `5.4`
+`['zendserver']['version']` | string | Zend Server version to install | Yes | `7.0`
+`['zendserver']['phpversion']` | string | PHP version to install | Yes | `5.5`
 `['zendserver']['nginx']` | boolean| Set in you are using Nginx instead of Apache true or false boolean | No | `false`
 `['zendserver']['ordernumber']` | string | The order number part of the license information (if not provided, will bootstrap in enterprise trial) | No | `-`
 `['zendserver']['licensekey']` | string | The license key part of the license information | No | `-`
-`['zendserver']['production']` | boolean | Bootstrap Zend Server in production (true)/development(false) mode (See zend server <a href="http://files.zend.com/help/Zend-Server/zend-server.htm#launching_zend_server.htm">documentation</a> for more details) | Yes | `TRUE`
+`['zenserver']['acceptEula]` | boolean | Whether or not the End User License Agreement should be accepted by default upon bootstrap | No | `true`
+`['zendserver']['production']` | boolean | Bootstrap Zend Server in production (true)/development(false) mode (See zend server <a href="http://files.zend.com/help/Zend-Server/zend-server.htm#launching_zend_server.htm">documentation</a> for more details) | Yes | `true`
 `['zendserver']['apikeyname']` | string | Name for the web API key that the installer creates. The api key is required for all management functionality | Yes | `-`
 `['zendserver']['apikeysecret']` | string | A 64 character key used for signing API requests | Yes | `-`
 `['zendserver']['adminpassword']` | string | A 4-20 character password for the admin user (use this to log into the Zend Server GUI) | No | `p2ssw0rd1`
@@ -134,7 +139,7 @@ Set the attributes:
 }
 ```
 
-Use the attributes hash to set the directives: 
+Use the attributes hash to set the directives:
 
 ```ruby
 include_recipe "zendserver"

@@ -15,12 +15,15 @@ default['zendserver']['nginx'] = false
 # GUI default passwords
 default['zendserver']['adminpassword'] = 'p2ssw0rd1'
 
-# The order number and license 
+# EULA
+default['zendserver']['acceptEula'] = true
+
+# The order number and license
 # If needed, generate a trial license at this URL: [FILL_URL]
 # The attributes have to be present, be sure to supply globally if not set here.
 default['zendserver']['ordernumber'] = ''
 default['zendserver']['licensekey'] = ''
-default['zendserver']['production'] = 'TRUE'
+default['zendserver']['production'] = true
 
 # api key name and secret. Secret's length has to be 64 characters exactly.
 # The attributes have to be present, be sure to supply globally if not set here.
