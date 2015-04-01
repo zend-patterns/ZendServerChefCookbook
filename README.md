@@ -25,8 +25,8 @@ Attributes
 #### zendserver::single
 Key | Type | Description | Required | Default
 --- | --- | --- | --- | --- |
-`['zendserver']['version']` | string | Zend Server version to install | Yes | `7.0`
-`['zendserver']['phpversion']` | string | PHP version to install | Yes | `5.5`
+`['zendserver']['version']` | string | Zend Server version to install | Yes | `8.0`
+`['zendserver']['phpversion']` | string | PHP version to install | Yes | `5.6`
 `['zendserver']['nginx']` | boolean| Set in you are using Nginx instead of Apache true or false boolean | No | `false`
 `['zendserver']['ordernumber']` | string | The order number part of the license information (if not provided, will bootstrap in enterprise trial) | No | `-`
 `['zendserver']['licensekey']` | string | The license key part of the license information | No | `-`

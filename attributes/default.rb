@@ -6,8 +6,8 @@ default['zendserver']['url'] = 'http://repos.zend.com/zend-server/'
 default['zendserver']['basedirdeb'] = 'deb_apache2.4'
 default['zendserver']['basedirrpm'] = 'rpm'
 
-default['zendserver']['version'] = '7.0'
-default['zendserver']['phpversion'] = '5.5'
+default['zendserver']['version'] = '8.0'
+default['zendserver']['phpversion'] = '5.6'
 
 # In case we want Nginx instead of Apache it has to be boolean !
 default['zendserver']['nginx'] = false
