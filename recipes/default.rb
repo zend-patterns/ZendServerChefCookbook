@@ -6,6 +6,8 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+include_recipe "apache2" unless node[:zendserver][:nginx]
+
 version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]
 url = node[:zendserver][:url]
@@ -59,12 +61,25 @@ when "rhel"
     url "http://nginx.org/packages/#{node['platform']}/#{node['platform_version'].split('.')[0]}/$basearch/" 
     only_if { node[:zendserver][:nginx] }
   end
+
+  directory "/etc/httpd/conf.d" do
+      action :create
+  end
 end
 
 log "Starting install for package #{package_name}"
 package package_name do
   :install
-  notifies :restart, 'service[zend-server]', :immediate 
+  notifies :run, 'bash[Copy zend server vhosts]', :immediate if node[:platform_family] == "rhel"
+  notifies :restart, 'service[zend-server]', :immediate
+end
+
+bash "Copy zend server vhosts" do
+    action :nothing
+    code <<-EOL
+    cp /etc/httpd/conf.d/zendserver_* /etc/httpd/conf-available/ &&
+    a2enconf zendserver_*
+    EOL
 end
 
 service "zend-server" do

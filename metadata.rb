@@ -8,6 +8,7 @@ version          '1.1.4'
 
 depends "apt"
 depends "yum"
+depends "apache2"
 
 recipe "zendserver", "Adds the Zend Server repo and installs the package"
 recipe "zendserver::single", "Install & bootstrap in 1 step"
