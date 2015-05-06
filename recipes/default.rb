@@ -71,15 +71,30 @@ log "Starting install for package #{package_name}"
 package package_name do
   :install
   notifies :run, 'bash[Copy zend server vhosts]', :immediate if node[:platform_family] == "rhel"
+  notifies :create, 'ruby_block[replace apache reload command]', :immediately if node[:platform_family] == "rhel"
   notifies :restart, 'service[zend-server]', :immediate
 end
 
+# To copy all Zend Server related Apache configs to conf-available
+# and activate tehm using a2enconf since this is the Apache cookbook's M.O.
+# Without this, the 10083 vhost required by ZS won't copy - only for RHEL
 bash "Copy zend server vhosts" do
     action :nothing
     code <<-EOL
     cp /etc/httpd/conf.d/zendserver_* /etc/httpd/conf-available/ &&
     a2enconf zendserver_*
     EOL
+end
+
+# To get around the fact that Apache hangs when issued a restart
+# immediately after a reload
+# Block replaces reload for Apache2 only after install of ZS
+# and only for RHEL
+ruby_block 'replace apache reload command' do
+  block do
+    r = resources('service[apache2]')
+    r.reload_command('/bin/true')
+  end
 end
 
 service "zend-server" do
