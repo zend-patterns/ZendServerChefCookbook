@@ -92,8 +92,12 @@ end
 # and only for RHEL
 ruby_block 'replace apache reload command' do
   block do
-    r = resources('service[apache2]')
-    r.reload_command('/bin/true')
+    begin
+      r = resources('service[apache2]')
+      r.reload_command('/bin/true')
+    rescue Chef::Exceptions::ResourceNotFound
+      log "service[apache2] resource not defined. Skipping restart."
+    end
   end
 end
 
