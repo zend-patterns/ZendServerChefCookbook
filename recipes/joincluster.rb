@@ -8,7 +8,7 @@ db_pass 	 = node[:zendserver][:dbpassword]
 db_name		 = node[:zendserver][:dbname]
 node_ip      = node[:zendserver][:node_ip].nil? ? node['ipaddress'] : node[:zendserver][:node_ip]
 
-Log "Using ip: #{node_ip}"
+Chef::Log.info("Using ip: #{node_ip}")
 
 # check before install that a suitable key is provided, if not bail out
 Chef::Application.fatal!("Zend Server db_host missing", 2) if db_host.nil? || db_host.empty?
