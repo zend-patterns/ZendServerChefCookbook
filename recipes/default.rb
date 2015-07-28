@@ -22,7 +22,7 @@ when "debian"
   include_recipe "apt::default"
   # do things on debian-ish platforms (debian, ubuntu, linuxmint)
 
-  log "Url: #{url}#{version}/#{basedirdeb}/"
+  Chef::Log.info("Url: #{url}#{version}/#{basedirdeb}/")
 
   apt_repository "zend-server" do
     uri "#{url}#{version}/#{basedirdeb}/"
@@ -67,7 +67,7 @@ when "rhel"
   end
 end
 
-log "Starting install for package #{package_name}"
+Chef::Log.info("Starting install for package #{package_name}")
 package package_name do
   :install
   notifies :run, 'bash[Copy zend server vhosts]', :immediate if node[:platform_family] == "rhel"
@@ -96,7 +96,7 @@ ruby_block 'replace apache reload command' do
       r = resources('service[apache2]')
       r.reload_command('/bin/true')
     rescue Chef::Exceptions::ResourceNotFound
-      log "service[apache2] resource not defined. Skipping restart."
+      Chef::Log.info("service[apache2] resource not defined. Skipping restart.")
     end
   end
 end
