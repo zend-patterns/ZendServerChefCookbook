@@ -82,8 +82,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     
     chef.json = {
       zendserver: {
-        version: "7.0",
-        phpversion: "5.5",
+        version: "8.0",
+        phpversion: "5.6",
         basedirdeb: "deb_apache2.4", #see http://repos.zend.com/zend-server/7.0/
         adminpassword: "12345678",
         production: "false", # string
