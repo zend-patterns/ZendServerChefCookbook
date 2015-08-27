@@ -25,3 +25,10 @@ def is_node_joined(keyname, secret)
 	p = shell_out(system_info)
 	p.stdout.include?  "ZendServerCluster"
 end
+
+def is_restart_needed(keyname, secret)
+    restart_needed_cmd = "#{node[:zendserver][:zsmanage]} system-info -N #{keyname} -K #{secret} -U http://#{node[:hostname]}:10081/ZendServer/ 2>/dev/null | head -n 1 | awk '{print $4}'"
+    p = shell_out(restart_needed_cmd)
+    Chef::Log.info("Restart needed - system-info output: #{p.stdout}")
+    p.stdout.include? "pendingRestart"
+end
