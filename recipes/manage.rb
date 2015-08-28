@@ -19,3 +19,18 @@ execute "restart-api-if-needed" do
   retries 3
   retry_delay 3
 end
+
+bash "restart-api-and-wait-for-ok" do
+    code <<-EOH
+    #{node[:zendserver][:zsmanage]} #{restart} -N #{node[:zendserver][:apikeyname]} -K #{node[:zendserver][:apikeysecret]}
+    sleep 3
+    while :; do if [ `/usr/local/zend/bin/zs-manage system-info -N #{node[:zendserver][:apikeyname]} -K #{node[:zendserver][:apikeysecret]} | head -n 1 | awk '{print $4}' != "pendingRestart" ] ; then break; fi; sleep 1; done;
+    EOH
+    action :nothing
+end
+
+execute "config-apply-changes" do
+    action :nothing
+    command "/usr/local/zend/bin/zs-manage config-apply-changes -N #{node[:zendserver][:apikeyname]} -K #{node[:zendserver][:apikeysecret]} | head -n 1 | awk '{print $2}'; sleep 3;"
+    notifies :run, "execute[restart-api]", :immediate
+end
