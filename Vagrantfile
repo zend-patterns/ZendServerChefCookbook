@@ -77,12 +77,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.berkshelf.except = []
 
   config.vm.provision :chef_solo do |chef|
-    chef.verbose_logging    = "true" 
-    chef.log_level          = :debug  
-    
+    #chef.verbose_logging    = "true" 
+    #chef.log_level          = :debug  
+
     chef.json = {
       zendserver: {
-        version: "8.0",
+        version: "8.5",
         phpversion: "5.6",
         basedirdeb: "deb_apache2.4", #see http://repos.zend.com/zend-server/7.0/
         adminpassword: "12345678",
