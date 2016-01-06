@@ -37,4 +37,4 @@ default['zendserver']['dbusername'] = ''
 default['zendserver']['dbpassword'] = ''
 default['zendserver']['dbname'] = 'ZendServer'
 
-default['zendserver']['directives'] = []
+default['zendserver']['directives'] = {}
