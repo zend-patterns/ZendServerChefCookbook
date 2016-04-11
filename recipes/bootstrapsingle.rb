@@ -14,7 +14,7 @@ bs_command << " -o #{order_number}" unless order_number.nil? || order_number.emp
 bs_command << " -l #{license_key}" unless license_key.nil? || license_key.empty?
 bs_command << " -r #{production}" unless production.nil? || production.empty?
 bs_command << " -e #{admin_email}" unless admin_email.nil? || admin_email.empty?
-bs_command << " -d #{devpassword}" unless dev_password.nil? || dev_password.empty?
+bs_command << " -d #{dev_password}" unless dev_password.nil? || dev_password.empty?
 
 
 execute "create-api-key" do
