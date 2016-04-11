@@ -23,7 +23,7 @@ default['zendserver']['acceptEula'] = true
 # The attributes have to be present, be sure to supply globally if not set here.
 default['zendserver']['ordernumber'] = ''
 default['zendserver']['licensekey'] = ''
-default['zendserver']['production'] = true
+default['zendserver']['production'] = "true"
 
 # api key name and secret. Secret's length has to be 64 characters exactly.
 # The attributes have to be present, be sure to supply globally if not set here.
