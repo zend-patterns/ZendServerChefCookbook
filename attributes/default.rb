@@ -37,4 +37,7 @@ default['zendserver']['dbusername'] = ''
 default['zendserver']['dbpassword'] = ''
 default['zendserver']['dbname'] = 'ZendServer'
 
+default['zendserver']['java_package'] = 'openjdk-7-jre'
+default['zendserver']['java_classpath'] = '.:/usr/local/zend/bin/javamw.jar'
+
 default['zendserver']['directives'] = {}
