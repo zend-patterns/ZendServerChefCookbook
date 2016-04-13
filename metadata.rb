@@ -4,11 +4,14 @@ maintainer_email 'maurice.k@zend.com'
 license          'All rights reserved'
 description      'Installs/Configures zendserver'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.7.0'
+version          '1.7.1'
 
 depends "apt"
 depends "yum"
 depends "apache2"
+
+# If planning on using Javabridge, add hte java cookbook as a dependency in a
+# wrapper/application cookbook if node[:zendserver][:java_install_source] is cookbook
 
 recipe "zendserver", "Adds the Zend Server repo and installs the package"
 recipe "zendserver::single", "Install & bootstrap in 1 step"

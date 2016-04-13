@@ -7,6 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 include_recipe "apache2" unless node[:zendserver][:nginx]
+include_recipe "apache2::mod_access_compat" unless node[:zendserver][:nginx]
 
 version = node[:zendserver][:version]
 phpversion = node[:zendserver][:phpversion]

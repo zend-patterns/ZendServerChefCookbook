@@ -85,6 +85,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         version: "8.5",
         phpversion: "5.6",
         basedirdeb: "deb_apache2.4", #see http://repos.zend.com/zend-server/7.0/
+        basedirrpm: "rpm_apache2.4", #see http://repos.zend.com/zend-server/7.0/
         adminpassword: "12345678",
         production: "false", # string
         apikeyname: "my_key",
