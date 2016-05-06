@@ -4,7 +4,7 @@ default['zendserver']['zsmanage']  = '/usr/local/zend/bin/zs-manage'
 #URL needs to have trailing slash
 default['zendserver']['url'] = 'http://repos.zend.com/zend-server/'
 default['zendserver']['basedirdeb'] = 'deb_apache2.4'
-default['zendserver']['basedirrpm'] = 'rpm'
+default['zendserver']['basedirrpm'] = 'rpm_apache2.4'
 
 default['zendserver']['version'] = '8.0'
 default['zendserver']['phpversion'] = '5.6'
