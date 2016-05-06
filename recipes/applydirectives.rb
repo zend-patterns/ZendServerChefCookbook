@@ -1,3 +1,5 @@
+include_recipe "zendserver::manage"
+
 node[:zendserver][:directives].each do |d, v|
   zendserver_directive d do
     value v
