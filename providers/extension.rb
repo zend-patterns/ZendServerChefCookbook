@@ -14,7 +14,7 @@ action :enable do
 end
 
 action :disable do
-	p=shell_out("#{node[:zendserver][:zsmanage]} extension-off -e #{@new_resource} -N #{node[:zendserver][:apikeyname]} -K #{node[:zendserver][:apikeysecret]}")
+	p=shell_out("#{node[:zendserver][:zsmanage]} extension-off -e #{@new_resource.name} -N #{node[:zendserver][:apikeyname]} -K #{node[:zendserver][:apikeysecret]}")
 	Chef::Log.info("#{node[:zendserver][:zsmanage]} extension-off -e #{@new_resource.name} -N #{node[:zendserver][:apikeyname]} -K #{node[:zendserver][:apikeysecret]}")
 	Chef::Log.debug(p.stdout)
 	if p.stdout.split("\n")[1] =~ /\.?You should restart php after this action/i
