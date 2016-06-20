@@ -28,6 +28,7 @@ when "debian"
   apt_repository "zend-server" do
     uri "#{url}#{version}/#{basedirdeb}/"
     components ["server","non-free"]
+    distribution ''
     key "http://repos.zend.com/zend.key"
     action :add
     notifies :run, "execute[apt-get update]", :immediately
