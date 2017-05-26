@@ -36,7 +36,8 @@ when "debian"
 
   apt_repository "nginx" do
     uri "http://nginx.org/packages/#{node['platform']}" 
-    components [node['lsb']['codename'], 'nginx']
+    components ['nginx']
+    distribution node['lsb']['codename']
     key "http://nginx.org/keys/nginx_signing.key"
     only_if { node[:zendserver][:nginx] }
   end
