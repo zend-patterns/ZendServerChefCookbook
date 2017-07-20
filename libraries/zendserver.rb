@@ -17,7 +17,7 @@ def is_server_bootstrapped(keyname, secret)
 	Chef::Log.info("OUT: #{p.stdout}")
 	Chef::Log.info("ERR: #{p.stderr}")
 	
-	!p.stderr.include?  "Bootstrap is needed"
+	!(p.stderr.include?("Bootstrap is needed") || p.stderr.include?("authentication error. check your API key details") || p.stderr.include?("Insufficient permissions"))
 end
 
 def is_node_joined(keyname, secret)
