@@ -20,6 +20,13 @@ execute "restart-api-if-needed" do
   retry_delay 3
 end
 
+bash "wait-for-db-connection" do
+  action :nothing
+  code <<-EOH
+  while :; do if [ -z `/usr/local/zend/bin/zs-manage system-info -N develop -K BDUFCMmCGTi2bZFqDn8rATUiTRSSdbQX3SdwKHwDkMJd2hX47LYcOtb8iTLCf2iG -U http://dev-green-webs:10081/ZendServer/ 2>&1 | grep 'databaseConnectionError' | awk -F ":" '{print $2}'` ] ; then break; else echo 'no db'; fi; sleep 1; done ;
+  EOH
+end
+
 bash "restart-api-and-wait-for-ok" do
     code <<-EOH
     #{node[:zendserver][:zsmanage]} #{restart} -N #{node[:zendserver][:apikeyname]} -K #{node[:zendserver][:apikeysecret]}

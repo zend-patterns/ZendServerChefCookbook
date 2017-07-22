@@ -76,6 +76,7 @@ package package_name do
   notifies :run, 'bash[Copy zend server vhosts]', :immediate if node[:platform_family] == "rhel"
   notifies :create, 'ruby_block[replace apache reload command]', :immediately if node[:platform_family] == "rhel"
   notifies :restart, 'service[zend-server]', :immediate
+  notifies :run, 'bash[wait-for-db-connection]', :immediate if node[:platform_family] == "rhel"
 end
 
 # To copy all Zend Server related Apache configs to conf-available
@@ -105,5 +106,6 @@ ruby_block 'replace apache reload command' do
 end
 
 service "zend-server" do
+  provider Chef::Provider::Service::Init::Redhat if node[:platform_family] == "rhel" && node['platform_version'].to_f >= 7.2
   action :nothing
 end
