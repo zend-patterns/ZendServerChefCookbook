@@ -4,11 +4,10 @@ maintainer_email 'maurice.k@zend.com'
 license          'All rights reserved'
 description      'Installs/Configures zendserver'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.8.4'
+version          '1.8.5'
 
 depends "apt"
 depends "yum"
-depends "apache2"
 
 # If planning on using Javabridge, add hte java cookbook as a dependency in a
 # wrapper/application cookbook if node[:zendserver][:java_install_source] is cookbook
